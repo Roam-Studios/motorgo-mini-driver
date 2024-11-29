@@ -11,7 +11,12 @@
 namespace MotorGo
 {
 
-struct BLDCChannelParameters
+// Base class for channel parameters
+struct ChannelParameters
+{
+};
+
+struct PWM6ChannelParameters : ChannelParameters
 {
   uint8_t uh;
   uint8_t ul;
@@ -22,6 +27,20 @@ struct BLDCChannelParameters
   uint8_t current_u;
   uint8_t current_v;
   uint8_t current_w;
+  uint8_t enc_cs;
+};
+
+struct PWM2ChannelParameters : ChannelParameters
+{
+  uint8_t uh;
+  uint8_t ul;
+  uint8_t enc_cs;
+};
+
+struct DCChannelParameters
+{
+  uint8_t pwm;
+  uint8_t current;
   uint8_t enc_cs;
 };
 

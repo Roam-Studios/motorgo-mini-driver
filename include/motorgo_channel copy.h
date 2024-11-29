@@ -28,12 +28,12 @@ class MotorChannel
  public:
   /**
    * @brief Constructor for the MotorChannel class.
-   * @param params ChannelParameters structure containing the pin
+   * @param params BLDCChannelParameters structure containing the pin
    * configuration for the motor channel.
    * @param name The name of the motor channel, used for saving calibration
    * parameters to EEPROM.
    */
-  MotorChannel(ChannelParameters params, const char* name);
+  MotorChannel(BLDCChannelParameters params, const char* name);
   MotorChannel(const MotorChannel&) = delete;  // Delete copy constructor
   MotorChannel& operator=(const MotorChannel&) =
       delete;  // Delete copy assignment operator
@@ -51,7 +51,7 @@ class MotorChannel
   * @param channel_config ChannelConfiguration structure containing the
   * configuration for the motor channel.
   */
-  virtual void init(ChannelConfiguration channel_config) = 0;
+  void init(ChannelConfiguration channel_config);
 
   /**
    * @brief Initializes motor and encoder with the option of calibration.
@@ -62,7 +62,7 @@ class MotorChannel
    * configuration for the motor channel.
    * @param should_calibrate If true, performs calibration on startup.
    */
-  virtual void init(ChannelConfiguration channel_config, bool should_calibrate);
+  void init(ChannelConfiguration channel_config, bool should_calibrate);
 
   /** @} */  // end of motor_initialization group
 
@@ -70,7 +70,7 @@ class MotorChannel
    * @brief Runs the control loop for the motor channel and updates encoder
    *        data. This should be run as fast as possible, without delays.
    */
-  virtual void loop();
+  void loop();
 
   /**
    * @name PID Controller Management
@@ -333,7 +333,7 @@ class MotorChannel
   const char* name;
 
   // Encoder, motor, and driver instances
-  FOCMotor motor;
+  BLDCMotor motor;
   BLDCDriver6PWM driver;
   MagneticSensorMT6701SSI encoder;
   //   Calibrated sensor stores the calibration parameters
